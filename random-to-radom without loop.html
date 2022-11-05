@@ -1,0 +1,49 @@
+<script>
+let winnerArray = [];
+let itemsLeft = 10;
+let runAmt = itemsLeft;
+let items = {};
+
+const addToArray = (random) => {
+  let randomResult = random % itemsLeft;
+  if (randomResult === 0) {
+    randomResult = 1;
+  }
+  if (itemsLeft === randomResult) {
+    if (items[randomResult] !== undefined) {
+      winnerArray.push(items[randomResult]);
+      console.log(1,randomResult,items,winnerArray);
+    } else {
+      winnerArray.push(itemsLeft);
+      console.log(2,randomResult,items,winnerArray);
+    }
+  } else {
+    if (items[randomResult] === undefined) {
+      let winner = randomResult;
+      winnerArray.push(winner);
+      console.log(3,randomResult,items,winnerArray);
+      if (items[itemsLeft] !== undefined) {
+        items[winner] = items[itemsLeft];
+      } else {
+        items[winner] = itemsLeft;
+      }
+    } else {
+      winnerArray.push(items[randomResult]);
+      console.log(4,randomResult,items,winnerArray);
+
+      if (items[itemsLeft] !== undefined) {
+        let itemLeftVal = items[itemsLeft]; 
+        items[randomResult] = itemLeftVal;
+      } else {
+        items[randomResult] = itemsLeft;
+      }
+    }
+  }
+    itemsLeft--;
+};
+
+for (let i = 0; i < runAmt; i++) {
+  addToArray(Math.floor(Math.random() * 10000000000000000000000) + 1);
+}
+
+</script>
